@@ -1,7 +1,7 @@
 <template>
   <form @submit.prevent="handleSubmit">
     <input type="text" placeholder="name" v-model="displayName" />
-    <div v-if="userExists">Name Exists</div>
+    <div v-if="nameExists">Name Exists</div>
     <div v-if="nameMin">Name must be 3</div>
     <div v-if="nameMax">Name max 30</div>
     <input required type="password" placeholder="password" v-model="password" />
@@ -11,7 +11,7 @@
       placeholder="confirm password"
       v-model="passwordConfirm"
     />
-    <div v-if="!passwordMatch">Password doesnt match</div>
+    <div v-if="passwordMatch">Password doesnt match</div>
     <button>Sign up</button>
   </form>
 </template>
@@ -23,12 +23,11 @@ import { useRouter } from 'vue-router'
 export default {
   setup(props, context) {
     const store = useStore()
-    const router = useRouter()
-
     const displayName = ref('')
     const password = ref('')
     const passwordConfirm = ref('')
-    const newUser = ref({
+    const nameExists = ref(false)
+    const newUser = reactive({
       name: null,
       password: null,
       passwordConfirm: null,
@@ -38,22 +37,23 @@ export default {
       cart: [],
       id: null,
     })
+    const router = useRouter()
     //Auth
     const nameMin = ref(false)
     const nameMax = ref(false)
     const passwordMatch = ref(false)
-    const userExists = ref(false)
-
     //Functions
-    const validatePassword = () => {
-      if (password.value === passwordConfirm.value) {
-        passwordMatch.value = true
-      } else {
-        passwordMatch.value = false
-      }
+    const chechIfUserExist = (userName) => {
+      store.state.users.forEach((el) => {
+        if (userName.value === el.name) {
+          return (nameExists.value = false)
+        } else {
+          return (nameExists.value = true)
+        }
+      })
     }
 
-    const validateName = () => {
+    const createUser = () => {
       if (displayName.value.length < 3) {
         nameMin.value = true
         nameMax.value = false
@@ -63,56 +63,54 @@ export default {
         nameMax.value = true
       }
 
-      if (displayName.value.length > 3 && displayName.value.length < 30) {
-        nameMin.value = false
-        nameMax.value = false
+      if (password.value === passwordConfirm.value) {
+        passwordMatch.value = false
+      } else {
+        passwordMatch.value = true
       }
-    }
-
-    const validateUserExists = (displayName) => {
-      store.state.users.find((user) => {
-        if (user.value.name === displayName.value) {
-          return (userExists.value = true)
-        } else {
-          return (userExists.value = false)
-        }
-      })
-    }
-
-    const createUser = () => {
-      newUser.value.name = displayName.value
-      newUser.value.password = password.value
-      newUser.value.passwordConfirm = passwordConfirm.value
-      newUser.value.logedIn = true
-    }
-    const createCurrentUserInStore = () => store.commit('createUser', newUser)
-
-    const handleSubmit = () => {
-      validatePassword()
-      validateName()
-      validateUserExists(displayName)
 
       if (
-        !nameMin.value &&
-        !nameMax.value &&
-        passwordMatch.value &&
-        !userExists.value
+        displayName.value.length > 3 &&
+        displayName.value.length < 30 &&
+        password.value
       ) {
-        createUser()
-        createCurrentUserInStore()
+        nameMin.value = false
+        nameMax.value = false
+        newUser.name = displayName
+        newUser.logedIn = true
+        newUser.password = password
+        newUser.passwordMatch = passwordConfirm
+        newUser.id = passwordConfirm
 
-        router.push('/user')
+        chechIfUserExist(displayName)
+
+        if (nameExists.value) {
+          nameExists.value = false
+
+          const createCurrentUserInStore = () =>
+            store.commit('createUser', newUser)
+          createCurrentUserInStore()
+
+          router.push('/user')
+        } else {
+          nameExists.value = true
+          console.log('galvok kita')
+        }
       }
+    }
+    const handleSubmit = () => {
+      createUser()
     }
     return {
       newUser,
-      userExists,
+      nameExists,
       displayName,
       password,
       passwordConfirm,
       passwordMatch,
       nameMin,
       nameMax,
+      createUser,
       handleSubmit,
     }
   },

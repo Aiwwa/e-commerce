@@ -10,9 +10,9 @@ export default createStore({
   mutations: {
     createUser(state, payload) {
       state.currentUser = payload
+      state.users.push(payload)
     },
-    logOut({ currentUser }) {
-      console.log(currentUser)
+    logOut({ currentUser, users }) {
       currentUser.logedIn = false
     },
   },

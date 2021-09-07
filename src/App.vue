@@ -5,6 +5,9 @@
     <div v-if="this.$store.state.currentUser.logedIn">
       <router-link to="/userProducts">My Products</router-link>
     </div>
+    <div v-if="this.$store.state.currentUser.logedIn">
+      <router-link to="/cart">Cart</router-link>
+    </div>
     <div v-if="!this.$store.state.currentUser.logedIn">
       <router-link to="/login">
         Log in
@@ -14,9 +17,6 @@
       <router-link to="/user">
         Account
       </router-link>
-    </div>
-    <div v-if="this.$store.state.currentUser.logedIn">
-      <router-link to="/cart">Cart</router-link>
     </div>
   </div>
   <router-view />

@@ -1,4 +1,5 @@
 <template>
+  <div>Logen in as {{ userName }}</div>
   <button @click="logOutUser">log out</button>
 </template>
 
@@ -10,8 +11,8 @@ import { onBeforeRouteLeave, useRouter } from 'vue-router'
 export default {
   setup() {
     const store = useStore()
-    const { state } = useStore()
     const router = useRouter()
+    const userName = store.state.currentUser.name
 
     const logOutUser = () => {
       router.push({ name: 'Home' })
@@ -19,6 +20,7 @@ export default {
     }
 
     return {
+      userName,
       logOutUser,
     }
   },
