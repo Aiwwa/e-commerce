@@ -17,11 +17,11 @@
 </template>
 
 <script>
-import { onMounted, onUpdated, reactive, ref } from 'vue'
+import { ref } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 export default {
-  setup(props, context) {
+  setup() {
     const store = useStore()
     const router = useRouter()
 
@@ -71,7 +71,7 @@ export default {
 
     const validateUserExists = (displayName) => {
       store.state.users.find((user) => {
-        if (user.value.name === displayName.value) {
+        if (user._value.name === displayName.value) {
           return (userExists.value = true)
         } else {
           return (userExists.value = false)
@@ -85,6 +85,7 @@ export default {
       newUser.value.passwordConfirm = passwordConfirm.value
       newUser.value.logedIn = true
     }
+
     const createCurrentUserInStore = () => store.commit('createUser', newUser)
 
     const handleSubmit = () => {
