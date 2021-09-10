@@ -8,6 +8,7 @@ export default createStore({
     users: [],
   },
   mutations: {
+    //Login/logout
     createUser(state, payload) {
       state.currentUser = payload
       state.users.push({ ...payload })
@@ -18,6 +19,12 @@ export default createStore({
     },
     logIn(state, payload) {
       state.currentUser = payload
+    },
+    //SingleUserProducts
+    addSingleProduct(state, payload) {
+      state.currentUser.products.push({ ...payload })
+
+      console.log(state.currentUser.products)
     },
   },
   actions: {},
