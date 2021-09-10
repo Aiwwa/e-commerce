@@ -1,5 +1,5 @@
 <template>
-  <div>Logen in as {{ userName }}</div>
+  <div>Loged in as {{ userName }}</div>
   <button @click="logOutUser">log out</button>
 </template>
 
