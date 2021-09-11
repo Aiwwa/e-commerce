@@ -8,6 +8,9 @@
     <div v-if="this.$store.state.currentUser.logedIn">
       <router-link to="/cart">Cart</router-link>
     </div>
+    <div v-if="this.$store.state.currentUser.logedIn">
+      <router-link to="/favorites">Favorite Products</router-link>
+    </div>
     <div v-if="!this.$store.state.currentUser.logedIn">
       <router-link to="/login">
         Log in

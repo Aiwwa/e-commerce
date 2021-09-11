@@ -1,10 +1,11 @@
 <template>
   <div>
-    <h2>product list</h2>
     <div v-for="(product, index) in userProducts" :key="index">
       <SingleUserProduct :product="product" @updateSingleProduct="update" />
     </div>
   </div>
+  <br />
+  <br />
   <div class="products-file-upload">
     <form @submit.prevent="handleAddProduct">
       <label for="product name">Product name</label>
@@ -42,8 +43,11 @@ export default {
       title: '',
       description: '',
       price: '',
+      sum: '',
+      count: '',
       img: [],
       id: '',
+      isFav: false,
       createdBy: state.currentUser.name,
     }
 

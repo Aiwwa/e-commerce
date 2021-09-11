@@ -37,6 +37,7 @@ export default {
       favorites: [],
       cart: [],
       id: null,
+      totalSum: 0,
     })
     //Auth
     const nameMin = ref(false)

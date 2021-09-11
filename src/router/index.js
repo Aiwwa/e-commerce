@@ -6,6 +6,7 @@ import User from '../views/User.vue'
 import UserProducts from '../views/UserProducts.vue'
 import Shop from '../views/Shop.vue'
 import Cart from '../views/Cart.vue'
+import Favorites from '../views/Favorites.vue'
 
 const requireAuth = (to, from, next) => {
   if (store.state.currentUser.logedIn === false) {
@@ -58,6 +59,12 @@ const routes = [
     path: '/userProducts',
     name: 'UserProducts',
     component: UserProducts,
+    beforeEnter: requireAuth,
+  },
+  {
+    path: '/favorites',
+    name: 'Favorites',
+    component: Favorites,
     beforeEnter: requireAuth,
   },
 ]
