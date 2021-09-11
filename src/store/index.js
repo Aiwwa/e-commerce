@@ -20,11 +20,13 @@ export default createStore({
     logIn(state, payload) {
       state.currentUser = payload
     },
+
     //SingleUserProducts
     addSingleProduct(state, payload) {
       state.currentUser.products.push({ ...payload })
-
-      console.log(state.currentUser.products)
+    },
+    removeSingleProduct(state, payload) {
+      state.currentUser.products = payload
     },
   },
   actions: {},

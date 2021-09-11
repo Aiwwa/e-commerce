@@ -1,7 +1,9 @@
 <template>
-  <div>Products</div>
   <div>
     <h2>product list</h2>
+    <div v-for="(product, index) in userProducts" :key="index">
+      <SingleUserProduct :product="product" @updateSingleProduct="update" />
+    </div>
   </div>
   <div class="products-file-upload">
     <form @submit.prevent="handleAddProduct">
@@ -27,17 +29,22 @@
 import { onMounted } from '@vue/runtime-core'
 import { useStore } from 'vuex'
 import { ref } from 'vue'
+import SingleUserProduct from '../components/SingleUserProduct.vue'
 
 export default {
+  components: { SingleUserProduct },
   setup() {
     const store = useStore()
     const { state } = useStore()
 
+    const userProducts = ref([])
     const userSingleProduct = {
       title: '',
       description: '',
       price: '',
       img: [],
+      id: '',
+      createdBy: state.currentUser.name,
     }
 
     //user product inputs
@@ -49,16 +56,20 @@ export default {
     const img3 = ref('')
     const img4 = ref('')
 
+    //Emits
+    const update = (filtered) => {
+      userProducts.value = filtered
+    }
     // Functions
-
     const handleAddProduct = () => {
       userSingleProduct.title = title.value
       userSingleProduct.description = description.value
       userSingleProduct.price = price.value
+      userSingleProduct.id = title.value
       userSingleProduct.img.push(img1.value, img2.value, img3.value, img4.value)
 
       addSingleProduct()
-
+      userProducts.value = state.currentUser.products
       userSingleProduct.img = []
 
       description.value = ''
@@ -75,10 +86,11 @@ export default {
 
     //Hooks
     onMounted(() => {
-      //
+      userProducts.value = state.currentUser.products
     })
 
     return {
+      userProducts,
       userSingleProduct,
       title,
       description,
@@ -87,6 +99,7 @@ export default {
       img2,
       img3,
       img4,
+      update,
       handleAddProduct,
       addSingleProduct,
     }
