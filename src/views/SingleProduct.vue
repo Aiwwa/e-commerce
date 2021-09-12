@@ -1,5 +1,6 @@
 <template>
   <div>Single Prod</div>
+  <button @click="goBack">Go back</button>
   <div>{{ produtc }}</div>
 </template>
 
@@ -7,13 +8,21 @@
 import { onMounted, onUpdated } from '@vue/runtime-core'
 import { useStore } from 'vuex'
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 export default {
   props: ['id'],
   setup(props) {
     const store = useStore()
     const { state } = useStore()
+    const router = useRouter()
 
     const produtc = ref({})
+
+    const goBack = () => {
+      router.go(-1)
+    }
+
+    //Hooks
     onMounted(() => {
       state.users.forEach((el) => {
         console.log(el._value.products)
@@ -25,7 +34,7 @@ export default {
       })
     })
 
-    return { produtc }
+    return { produtc, goBack }
   },
 }
 </script>

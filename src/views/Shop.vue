@@ -22,8 +22,7 @@
     >
       Add to favorites
     </button>
-    <div>
-      <!-- <router-link :to="{ name: 'SingleProduct', params: { id: post.id }"> -->
+    <div v-if="state.currentUser.logedIn">
       <router-link :to="{ name: 'SingleProduct', params: { id: product.id } }">
         More
       </router-link>
