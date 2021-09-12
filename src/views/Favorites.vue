@@ -2,6 +2,9 @@
   <div>Fav</div>
   <div v-for="(favorit, index) in favorites" :key="index">
     {{ favorit.title }}
+    <button @click="handelRemoveFromfavorites(favorit)">
+      Remove from fvorites
+    </button>
   </div>
 </template>
 
@@ -17,7 +20,13 @@ export default {
     const favorites = ref([])
 
     //Functions
-
+    const handelRemoveFromfavorites = (favorit) => {
+      const filtered = store.state.currentUser.favorites.filter((product) => {
+        return product.title !== favorit.title
+      })
+      store.commit('removeProductFromFavorites', filtered)
+      favorites.value = filtered
+    }
     //Hooks
     onMounted(() => {
       favorites.value = state.currentUser.favorites
@@ -28,7 +37,7 @@ export default {
       favorites.value = state.currentUser.favorites
     })
 
-    return { favorites }
+    return { favorites, handelRemoveFromfavorites }
   },
 }
 </script>

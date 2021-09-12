@@ -3,9 +3,6 @@
   <div v-for="(product, index) in productsUI" :key="index" class="wrapper">
     <div>{{ product.title }}</div>
     <div>{{ product.price }}</div>
-    <div>{{ product.createdBy }}</div>
-    <div>{{ product.isFav }}</div>
-    <div>{{ product.favorites }}</div>
     <button
       v-if="
         state.currentUser.name !== product.createdBy &&
@@ -51,7 +48,7 @@ export default {
 
     const handleAddToFavorites = (product) => {
       store.commit('updatefavoriteProducts', product)
-      products.value = state.users.map((user) => user._value.products)
+      // products.value = state.users.map((user) => user._value.products)
     }
 
     const handleAddToCart = (product) => {

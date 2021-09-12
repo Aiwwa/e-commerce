@@ -29,10 +29,10 @@ export default createStore({
       state.currentUser.products = payload
     },
     updatefavoriteProducts(state, payload) {
-      // state.currentUser.favorites.push({ ...payload, isFav: true })
-      // console.log('payload', payload)
-      // console.log('curr user', state.currentUser)
-      // console.log('state users', state.users)
+      state.currentUser.favorites.push({ ...payload })
+    },
+    removeProductFromFavorites(state, payload) {
+      state.currentUser.favorites = payload
     },
 
     //Cart
