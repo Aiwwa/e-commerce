@@ -66,7 +66,7 @@ export default {
 
     //Emits
     const update = (filtered) => {
-      userProducts.value = filtered
+      userProducts.value = { ...filtered }
     }
     // Functions
     const handleAddProduct = () => {

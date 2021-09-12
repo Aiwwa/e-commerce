@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { onMounted } from '@vue/runtime-core'
+import { onMounted, onUpdated } from '@vue/runtime-core'
 import { useStore } from 'vuex'
 import { ref } from 'vue'
 import UserCart from '../components/UserCart.vue'
@@ -25,12 +25,14 @@ export default {
 
     //Emits
     const removeProductFromCart = (filtered) => {
-      cart.value = filtered
+      cart.value = { ...filtered }
     }
+
     //Hooks
     onMounted(() => {
       cart.value = state.currentUser.cart
     })
+
     return { cart, state, removeProductFromCart }
   },
 }

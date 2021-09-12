@@ -12,7 +12,9 @@
       <button @click="plusCart(product)">+</button>
     </div>
     <div class="remove">
-      <button @click="handleRemoveSingleProduct(), handlePriceUpdate(product)">
+      <button
+        @click="handleRemoveSingleProduct(product), handlePriceUpdate(product)"
+      >
         Remove
       </button>
     </div>
@@ -31,9 +33,10 @@ export default {
     const singleProduct = ref({})
 
     //Functions
-    const handleRemoveSingleProduct = () => {
+    const handleRemoveSingleProduct = (product) => {
+      console.log(product.id, props.product.id)
       const filtered = store.state.currentUser.cart.filter((product) => {
-        return product.title !== props.product.title
+        return product.id !== props.product.id
       })
 
       store.commit('removeProductFromCart', filtered)

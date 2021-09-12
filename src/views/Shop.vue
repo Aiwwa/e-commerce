@@ -72,6 +72,7 @@ export default {
 
     const handleAddToCart = (product) => {
       store.commit('handleAddToCart', product)
+      store.commit('plusCartPrice', product)
     }
 
     //Hooks
