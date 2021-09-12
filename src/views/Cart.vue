@@ -33,7 +33,11 @@ export default {
       cart.value = state.currentUser.cart
     })
 
-    return { cart, state, removeProductFromCart }
+    return {
+      cart,
+      state,
+      removeProductFromCart,
+    }
   },
 }
 </script>

@@ -69,11 +69,12 @@ export default createStore({
       }
     },
     minusPriceOnRemove(state, payload) {
+      payload.count = 0
+
       if (payload.sum === 0 || payload.sum === '' || payload.sum === null) {
       } else {
         state.currentUser.totalSum -= Number(payload.sum)
         payload.sum = 0
-        payload.count = 0
       }
     },
   },

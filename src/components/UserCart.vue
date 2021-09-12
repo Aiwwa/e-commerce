@@ -34,7 +34,6 @@ export default {
 
     //Functions
     const handleRemoveSingleProduct = (product) => {
-      console.log(product.id, props.product.id)
       const filtered = store.state.currentUser.cart.filter((product) => {
         return product.id !== props.product.id
       })
