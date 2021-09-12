@@ -1,9 +1,9 @@
 <template>
-  <form @submit.prevent="handleSubmit">
+  <form @submit.prevent="handleSubmit" class="form">
     <input type="text" placeholder="name" v-model="displayName" />
-    <div v-if="userExists">Name Exists</div>
-    <div v-if="nameMin">Name must be 3</div>
-    <div v-if="nameMax">Name max 30</div>
+    <div v-if="userExists" class="danger">Name Exists</div>
+    <div v-if="nameMin" class="danger">Name must be at least 3 characters</div>
+    <div v-if="nameMax" class="danger">No more the 30 characters</div>
     <input required type="password" placeholder="password" v-model="password" />
     <input
       required
@@ -11,13 +11,13 @@
       placeholder="confirm password"
       v-model="passwordConfirm"
     />
-    <div v-if="!passwordMatch">Password doesnt match</div>
+    <div v-if="!passwordMatch" class="danger">Password doesnt match</div>
     <button>Sign up</button>
   </form>
 </template>
 
 <script>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 export default {
@@ -106,6 +106,11 @@ export default {
         router.push('/user')
       }
     }
+
+    //Hooks
+    onMounted(() => {
+      passwordMatch.value = true
+    })
     return {
       newUser,
       userExists,

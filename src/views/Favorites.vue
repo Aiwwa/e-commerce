@@ -31,7 +31,6 @@ export default {
     //Hooks
     onMounted(() => {
       favorites.value = state.currentUser.favorites
-      console.log(favorites.value)
     })
 
     return { favorites, handelRemoveFromfavorites }

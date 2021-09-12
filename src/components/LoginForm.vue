@@ -1,9 +1,9 @@
 <template>
-  <form @submit.prevent="handleLogin">
+  <form @submit.prevent="handleLogin" class="form">
     <input type="user name" placeholder="user name" v-model="userName" />
     <input type="password" placeholder="password" v-model="password" />
-    <div v-if="userExist">User doesn't exist</div>
-    <div v-if="logInFail">Username or password is wrong</div>
+    <div v-if="userExist" class="danger">User doesn't exist</div>
+    <div v-if="logInFail" class="danger">Username or password is wrong</div>
     <div class="error">{{ error }}</div>
     <button>Log in</button>
   </form>
@@ -82,4 +82,30 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.form {
+  display: flex;
+  flex-direction: column;
+  /* padding: 50px 200px; */
+}
+
+input {
+  display: inline-block;
+  margin: 20px 0;
+  font-size: 18px;
+  outline: none;
+  border: none;
+  padding: 20px 60px 10px 10px;
+}
+
+button {
+  margin: 20px 0;
+  font-size: 18px;
+  padding: 15px;
+  outline: none;
+  border: none;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+}
+</style>

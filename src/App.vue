@@ -1,25 +1,27 @@
 <template>
   <div id="nav">
-    <router-link to="/">Home</router-link>
-    <router-link to="/shop">E-Shop</router-link>
-    <div v-if="this.$store.state.currentUser.logedIn">
-      <router-link to="/userProducts">My Products</router-link>
-    </div>
-    <div v-if="this.$store.state.currentUser.logedIn">
-      <router-link to="/cart">Cart</router-link>
-    </div>
-    <div v-if="this.$store.state.currentUser.logedIn">
-      <router-link to="/favorites">Favorite Products</router-link>
-    </div>
-    <div v-if="!this.$store.state.currentUser.logedIn">
-      <router-link to="/login">
-        Log in
-      </router-link>
-    </div>
-    <div v-else>
-      <router-link to="/user">
-        Account
-      </router-link>
+    <div><router-link to="/">Home</router-link></div>
+    <div>
+      <router-link to="/shop">E-Shop</router-link>
+      <div v-if="this.$store.state.currentUser.logedIn">
+        <router-link to="/userProducts">My Products</router-link>
+      </div>
+      <div v-if="this.$store.state.currentUser.logedIn">
+        <router-link to="/cart">Cart</router-link>
+      </div>
+      <div v-if="this.$store.state.currentUser.logedIn">
+        <router-link to="/favorites">Favorite Products</router-link>
+      </div>
+      <div v-if="!this.$store.state.currentUser.logedIn">
+        <router-link to="/login">
+          Log in
+        </router-link>
+      </div>
+      <div v-else>
+        <router-link to="/user">
+          Account
+        </router-link>
+      </div>
     </div>
   </div>
   <router-view />
@@ -45,20 +47,29 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  font-size: 18px;
 }
 
 #nav {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  background-color: rgb(224, 223, 229);
+  border-bottom: 1px solid rgb(192, 192, 192);
+
+  div:nth-child(2) {
+    display: flex;
+    align-items: center;
+  }
 
   a {
     font-weight: bold;
-    color: #2c3e50;
+    color: black;
     padding: 30px;
+    text-decoration: none;
 
     &.router-link-exact-active {
-      color: #42b983;
+      color: rgb(122, 91, 24);
     }
   }
 
