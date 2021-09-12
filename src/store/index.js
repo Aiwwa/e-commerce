@@ -52,9 +52,9 @@ export default createStore({
       updatedItem.sum = sum
 
       state.currentUser.totalSum += Number(updatedItem.price)
-      console.log(state.currentUser.totalSum)
     },
     minusCartPrice(state, payload) {
+      console.log('minus', payload)
       let updatedItem = state.currentUser.cart.find(
         (el) => el.title === payload.title,
       )
@@ -65,18 +65,16 @@ export default createStore({
         updatedItem.sum = sum
 
         state.currentUser.totalSum -= Number(updatedItem.price)
-        console.log(state.currentUser.totalSum)
       }
     },
     minusPriceOnRemove(state, payload) {
-      let updatedItem = state.currentUser.cart.find(
-        (el) => el.title === payload.title,
-      )
-
-      console.log(payload.sum)
-      console.log(typeof payload.sum)
-      state.currentUser.totalSum -= Number(payload.sum)
-      updatedItem.sum = 0
+      console.log('remove', payload)
+      if (payload.sum === 0 || payload.sum === '' || payload.sum === null) {
+        state.currentUser.totalSum -= Number(payload.price)
+      } else {
+        state.currentUser.totalSum -= Number(payload.sum)
+        payload.sum = 0
+      }
     },
   },
   actions: {},

@@ -55,7 +55,6 @@ export default {
     }
 
     const handleAddToCart = (product) => {
-      console.log(product)
       store.commit('handleAddToCart', product)
     }
 

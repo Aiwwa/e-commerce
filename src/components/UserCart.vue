@@ -1,6 +1,8 @@
 <template>
   <div>{{ singleProduct }}</div>
-  <button @click="handleRemoveSingleProduct">Remove</button>
+  <button @click="handleRemoveSingleProduct(), handlePriceUpdate(product)">
+    Remove
+  </button>
   <button @click="plusCart(product)">+</button>
   <button @click="minusCart(product)">-</button>
 </template>
@@ -19,8 +21,6 @@ export default {
     //Functions
     const handleRemoveSingleProduct = () => {
       const filtered = store.state.currentUser.cart.filter((product) => {
-        store.commit('minusPriceOnRemove', product)
-
         return product.title !== props.product.title
       })
 
@@ -34,11 +34,22 @@ export default {
     const minusCart = (product) => {
       store.commit('minusCartPrice', product)
     }
+    //When removing product from cart
+    const handlePriceUpdate = (product) => {
+      console.log(product)
+      store.commit('minusPriceOnRemove', product)
+    }
 
     //Hooks
     onMounted(() => (singleProduct.value = props.product))
 
-    return { singleProduct, handleRemoveSingleProduct, plusCart, minusCart }
+    return {
+      singleProduct,
+      handleRemoveSingleProduct,
+      plusCart,
+      minusCart,
+      handlePriceUpdate,
+    }
   },
 }
 </script>
