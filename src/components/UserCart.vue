@@ -1,10 +1,22 @@
 <template>
-  <div>{{ singleProduct }}</div>
-  <button @click="handleRemoveSingleProduct(), handlePriceUpdate(product)">
-    Remove
-  </button>
-  <button @click="minusCart(product)">-</button>
-  <button @click="plusCart(product)">+</button>
+  <div><img :src="singleProduct.img" alt="" /></div>
+  <div class="cart-info">
+    <div>
+      <div>Product: {{ singleProduct.title }}</div>
+      <div>Price: {{ singleProduct.price }} €</div>
+      <div>Sum: {{ singleProduct.sum }} €</div>
+    </div>
+    <div class="counter">
+      <button @click="minusCart(product)">-</button>
+      <button>{{ singleProduct.count }}</button>
+      <button @click="plusCart(product)">+</button>
+    </div>
+    <div>
+      <button @click="handleRemoveSingleProduct(), handlePriceUpdate(product)">
+        Remove
+      </button>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -53,4 +65,25 @@ export default {
 }
 </script>
 
-<style></style>
+<style scoped>
+img {
+  width: 400px;
+  height: 400px;
+  object-fit: cover;
+}
+
+.counter {
+  display: flex;
+}
+
+.cart-info {
+  margin-top: 20px;
+  margin-left: 400px;
+  width: 600px;
+}
+
+button {
+  width: 100%;
+  border: 1px solid rgb(224, 224, 224);
+}
+</style>

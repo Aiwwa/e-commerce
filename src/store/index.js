@@ -46,7 +46,7 @@ export default createStore({
       let updatedItem = state.currentUser.cart.find(
         (el) => el.title === payload.title,
       )
-
+      updatedItem.count++
       let sum = Number(updatedItem.sum)
       sum += Number(payload.price)
       updatedItem.sum = sum
@@ -58,6 +58,7 @@ export default createStore({
       let updatedItem = state.currentUser.cart.find(
         (el) => el.title === payload.title,
       )
+      updatedItem.count--
 
       if (updatedItem.sum > 0) {
         let sum = Number(updatedItem.sum)

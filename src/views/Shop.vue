@@ -1,35 +1,44 @@
 <template>
   <div class="product-container">
     <div v-for="(product, index) in productsUI" :key="index" class="wrapper">
-      <div>{{ product.title }}</div>
-      <div>{{ product.price }}</div>
-      <div>User: {{ product.createdBy }}</div>
+      <div>
+        <img :src="product.img[0]" alt="" />
+      </div>
       <div class="more-info">
-        <button
-          v-if="
-            state.currentUser.name !== product.createdBy &&
-            state.currentUser.logedIn
-          "
-          @click="handleAddToCart(product)"
-        >
-          Add to cart
-        </button>
-        <button
-          v-if="
-            state.currentUser.name !== product.createdBy &&
-            state.currentUser.logedIn &&
-            !product.isFav
-          "
-          @click="handleAddToFavorites(product)"
-        >
-          Add to favorites
-        </button>
-        <div v-if="state.currentUser.logedIn">
-          <router-link
-            :to="{ name: 'SingleProduct', params: { id: product.id } }"
-          >
-            More
-          </router-link>
+        <div class="more-info-sub">
+          <div>Name: {{ product.title }}</div>
+          <div>Product price {{ product.price }} €</div>
+          <div>Added by: {{ product.createdBy }}</div>
+        </div>
+        <div class="more-info-btn">
+          <div class="sub-btn">
+            <button
+              v-if="
+                state.currentUser.name !== product.createdBy &&
+                state.currentUser.logedIn
+              "
+              @click="handleAddToCart(product)"
+            >
+              Add to cart
+            </button>
+            <button
+              v-if="
+                state.currentUser.name !== product.createdBy &&
+                state.currentUser.logedIn &&
+                !product.isFav
+              "
+              @click="handleAddToFavorites(product)"
+            >
+              Add to favorites
+            </button>
+          </div>
+          <div v-if="state.currentUser.logedIn" class="more">
+            <router-link
+              :to="{ name: 'SingleProduct', params: { id: product.id } }"
+            >
+              More
+            </router-link>
+          </div>
         </div>
       </div>
     </div>
@@ -82,7 +91,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .product-container {
   width: 100vw;
   height: 100vh;
@@ -90,17 +99,60 @@ export default {
   padding-top: 50px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 300px 300px 300px 300px;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  overflow: hidden;
 }
 
 .wrapper {
+  display: flex;
+  flex-direction: column;
+  border: 1px dotted rgb(211, 211, 211);
 }
 
-.wrapper:hover .more-info {
-  display: block;
+.wrapper img {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+}
+.wrapper .more-info {
+  display: flex;
+  flex-direction: column;
 }
 
-.more-info {
-  display: none;
+.wrapper .more-info .more-info-sub {
+  display: flex;
+}
+.wrapper .more-info .more-info-sub div {
+  margin: 0 10px;
+  color: rgb(122, 91, 24);
+}
+
+.more {
+  padding: 5px 10px;
+  border: 1px solid black;
+  margin: 10px;
+  background: white;
+}
+.more:hover {
+  background: rgba(167, 167, 167, 0.466);
+}
+.more a {
+  text-decoration: none;
+  color: black;
+}
+button {
+  margin: 10px;
+  padding: 10px 30px;
+  border: 1px solid black;
+  width: 100%;
+}
+
+button:hover {
+  background: rgba(167, 167, 167, 0.466);
+}
+
+.sub-btn {
+  display: flex;
+  justify-content: center;
 }
 </style>
