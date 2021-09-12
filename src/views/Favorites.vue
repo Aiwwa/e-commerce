@@ -24,6 +24,7 @@ export default {
       const filtered = store.state.currentUser.favorites.filter((product) => {
         return product.title !== favorit.title
       })
+
       store.commit('removeProductFromFavorites', filtered)
       favorites.value = filtered
     }
@@ -31,10 +32,6 @@ export default {
     onMounted(() => {
       favorites.value = state.currentUser.favorites
       console.log(favorites.value)
-    })
-
-    onUpdated(() => {
-      favorites.value = state.currentUser.favorites
     })
 
     return { favorites, handelRemoveFromfavorites }

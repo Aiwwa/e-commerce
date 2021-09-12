@@ -47,8 +47,7 @@ export default {
     }
 
     const handleAddToFavorites = (product) => {
-      store.commit('updatefavoriteProducts', product)
-      // products.value = state.users.map((user) => user._value.products)
+      store.commit('addToFavorites', product)
     }
 
     const handleAddToCart = (product) => {
@@ -60,8 +59,6 @@ export default {
       products.value = state.users.map((user) => user._value.products)
       setProducts()
     })
-
-    onUpdated(() => {})
 
     return {
       products,

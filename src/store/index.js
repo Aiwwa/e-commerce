@@ -28,8 +28,8 @@ export default createStore({
     removeSingleProduct(state, payload) {
       state.currentUser.products = payload
     },
-    updatefavoriteProducts(state, payload) {
-      state.currentUser.favorites.push({ ...payload })
+    addToFavorites(state, payload) {
+      state.currentUser.favorites.push({ ...payload, isFav: true })
     },
     removeProductFromFavorites(state, payload) {
       state.currentUser.favorites = payload
