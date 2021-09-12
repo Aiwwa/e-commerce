@@ -68,7 +68,6 @@ export default createStore({
       }
     },
     minusPriceOnRemove(state, payload) {
-      console.log('remove', payload)
       if (payload.sum === 0 || payload.sum === '' || payload.sum === null) {
         state.currentUser.totalSum -= Number(payload.price)
       } else {

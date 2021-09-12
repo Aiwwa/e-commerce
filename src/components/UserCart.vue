@@ -3,8 +3,8 @@
   <button @click="handleRemoveSingleProduct(), handlePriceUpdate(product)">
     Remove
   </button>
-  <button @click="plusCart(product)">+</button>
   <button @click="minusCart(product)">-</button>
+  <button @click="plusCart(product)">+</button>
 </template>
 
 <script>
@@ -34,9 +34,8 @@ export default {
     const minusCart = (product) => {
       store.commit('minusCartPrice', product)
     }
-    //When removing product from cart
+    //When removing whole product from cart
     const handlePriceUpdate = (product) => {
-      console.log(product)
       store.commit('minusPriceOnRemove', product)
     }
 
