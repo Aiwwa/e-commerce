@@ -11,7 +11,7 @@
       <button>{{ singleProduct.count }}</button>
       <button @click="plusCart(product)">+</button>
     </div>
-    <div>
+    <div class="remove">
       <button @click="handleRemoveSingleProduct(), handlePriceUpdate(product)">
         Remove
       </button>
@@ -85,5 +85,9 @@ img {
 button {
   width: 100%;
   border: 1px solid rgb(224, 224, 224);
+}
+
+.remove {
+  display: flex;
 }
 </style>

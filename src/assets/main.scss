@@ -3,3 +3,11 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+button {
+  cursor: pointer;
+}
+
+button:hover {
+  background: rgba(167, 167, 167, 0.466);
+}

@@ -8,9 +8,11 @@
       </div>
       <div v-if="this.$store.state.currentUser.logedIn">
         <router-link to="/cart">Cart</router-link>
+        {{ $store.state.currentUser.cart.length }}
       </div>
       <div v-if="this.$store.state.currentUser.logedIn">
         <router-link to="/favorites">Favorite Products</router-link>
+        {{ $store.state.currentUser.favorites.length }}
       </div>
       <div v-if="!this.$store.state.currentUser.logedIn">
         <router-link to="/login">
@@ -34,8 +36,9 @@ import { ref } from '@vue/reactivity'
 
 export default {
   setup() {
-    // const store = useStore()
-    // const user = ref('')
+    const store = useStore()
+    const user = ref('')
+    return {}
   },
 }
 </script>
