@@ -22,6 +22,12 @@
     >
       Add to favorites
     </button>
+    <div>
+      <!-- <router-link :to="{ name: 'SingleProduct', params: { id: post.id }"> -->
+      <router-link :to="{ name: 'SingleProduct', params: { id: product.id } }">
+        More
+      </router-link>
+    </div>
   </div>
 </template>
 
