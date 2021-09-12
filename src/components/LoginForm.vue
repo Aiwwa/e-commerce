@@ -5,7 +5,7 @@
     <div v-if="userExist" class="danger">User doesn't exist</div>
     <div v-if="logInFail" class="danger">Username or password is wrong</div>
     <div class="error">{{ error }}</div>
-    <button>Log in</button>
+    <button class="log">Log in</button>
   </form>
 </template>
 
@@ -107,5 +107,9 @@ button {
   background-color: white;
   display: flex;
   justify-content: center;
+}
+
+.log {
+  margin: 0;
 }
 </style>

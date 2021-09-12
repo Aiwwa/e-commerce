@@ -1,7 +1,7 @@
 <template>
   <form @submit.prevent="handleSubmit" class="form">
     <input type="text" placeholder="name" v-model="displayName" />
-    <div v-if="userExists" class="danger">Name Exists</div>
+    <div v-if="userExists" class="danger">Name is already taken</div>
     <div v-if="nameMin" class="danger">Name must be at least 3 characters</div>
     <div v-if="nameMax" class="danger">No more the 30 characters</div>
     <input required type="password" placeholder="password" v-model="password" />
@@ -12,7 +12,7 @@
       v-model="passwordConfirm"
     />
     <div v-if="!passwordMatch" class="danger">Password doesnt match</div>
-    <button>Sign up</button>
+    <button class="sign">Sign up</button>
   </form>
 </template>
 
@@ -126,4 +126,8 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.sign {
+  margin: 0;
+}
+</style>
