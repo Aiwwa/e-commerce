@@ -11,14 +11,13 @@
 </template>
 
 <script>
-import { onMounted, onUpdated } from '@vue/runtime-core'
+import { onMounted } from '@vue/runtime-core'
 import { useStore } from 'vuex'
 import { ref } from 'vue'
 import UserCart from '../components/UserCart.vue'
 export default {
   components: { UserCart },
   setup() {
-    const store = useStore()
     const { state } = useStore()
 
     const cart = ref([])

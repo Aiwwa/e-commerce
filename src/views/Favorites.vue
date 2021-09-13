@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { onMounted, onUpdated } from '@vue/runtime-core'
+import { onMounted } from '@vue/runtime-core'
 import { useStore } from 'vuex'
 import { ref } from 'vue'
 export default {

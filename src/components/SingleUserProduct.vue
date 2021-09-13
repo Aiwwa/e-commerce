@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { onMounted, onUpdated } from '@vue/runtime-core'
+import { onMounted } from '@vue/runtime-core'
 import { ref } from 'vue'
 import { useStore } from 'vuex'
 
